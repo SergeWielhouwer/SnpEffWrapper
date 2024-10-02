@@ -199,10 +199,11 @@ def check_contigs(vcf_contigs, annotation_contigs, coding_table):
         raise MissingCodonTableError(
             "Could not find coding tables for all contigs, see warnings for details"
         )
-    if missing_contigs == vcf_contigs:
-        raise NoCommonContigsError(
-            "Could not find annotation data for any contigs, see warnings for details"
-        )
+    # this will lead to crashes when the vcf file contains 0 records.
+    # if missing_contigs == vcf_contigs:
+    #     raise NoCommonContigsError(
+    #         "Could not find annotation data for any contigs, see warnings for details"
+    #     )
     if len(unknown_encodings) > 0:
         raise UnknownCodingTableError(
             "Could not find coding table, see warnings for details"
